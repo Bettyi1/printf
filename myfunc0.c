@@ -121,13 +121,13 @@ int is_negative = 0;
 long int y = va_arg(types, long int);
 
 
-y = convert_size_number(n, size);
+y = convert_size_number(y, size);
 
 if (y == 0)
 buffer[j--] = '0';
 
 buffer[BUFF_SIZE - 1] = '\0';
-num = (unsigned long int)n;
+num = (unsigned long int)y;
 
 if (y < 0)
 {

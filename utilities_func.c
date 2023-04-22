@@ -32,7 +32,7 @@ int append_hexa_code(char ascii_code, char buffer[], int i)
 char map_to[] = "0123456789ABCDEF";
 
 if (ascii_code < 0)
-ascii_code * = -1;
+	ascii_code *= -1;
 
 buffer[i++] = '\\';
 buffer[i++] = 'x';
@@ -51,12 +51,8 @@ return (3);
 */
 int is_digit(char c)
 {
-if (c >= '0')
-{
-if (c <= ‘9’)
-}
-return (1);
-}
+if (c >= '0' && c <= '9')
+	return (1);
 
 return (0);
 }

@@ -133,7 +133,7 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 
 	UNUSED(width);
 
-	hexanum = convert_size_unsgnd(num, size);
+	hexanum = convert_size_unsgnd(hexanum, size);
 
 	if (hexanum == 0)
 		buffer[h--] = '0';
