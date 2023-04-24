@@ -48,7 +48,7 @@ int u_hexadeci(char ascii_code, char buffer[], int i)
  */
 int u_checkdgt(char c)
 {
-	if (c >= '0' && c <= ‘9’)
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }

@@ -34,7 +34,7 @@ int flags, width, precision, size, index = 0;
 			buffer[index++] = format[k];
 			if (index == BUFF_SIZE)
 				write_content(buffer, &index);
-					output_charracter++;
+					output_character++;
 		}
 		else
 		{
