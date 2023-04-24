@@ -5,21 +5,21 @@
 #include <stddef.h>
 
 /**
- * get_size - determine
+ * f_sizespecifier - determine
  * @format: string containing format
  * @i: arguments pointer
  *
  * Return: size.
  */
-int get_size(const char *format, int *i)
+int f_sizespecifier(const char *format, int *i)
 {
 	int k = *i + 1;
 	int size = 0;
 
 	if (format[k] == 'l')
-		size = S_LONG;
+		size = L_SIZE;
 	else if (format[k] == 'h')
-		size = S_SHORT;
+		size = SHORT_SIZE;
 
 	if (size == 0)
 		*i = k - 1;
@@ -28,4 +28,3 @@ int get_size(const char *format, int *i)
 
 	return (size);
 }
-
