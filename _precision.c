@@ -5,14 +5,14 @@
 #include <stddef.h>
 
 /**
- * get_precision - determine and precision
+ * f_prec - determine and precision
  * @format: pointer to formats
  * @i: Arguments input
  * @list: Arguments input
  *
  * Return: Precision.
  */
-int get_precision(const char *format, int *i, va_list list)
+int f_prec(const char *format, int *i, va_list list)
 {
 	int x = *i + 1;
 	int prec = -1;
@@ -24,7 +24,7 @@ int get_precision(const char *format, int *i, va_list list)
 
 	for (x += 1; format[x] != '\0'; x++)
 	{
-		if (is_digit(format[x]))
+		if (u_checkdgt(format[x]))
 		{
 			prec *= 10;
 			prec += format[x] - '0';
@@ -43,3 +43,4 @@ int get_precision(const char *format, int *i, va_list list)
 
 	return (prec);
 }
+
