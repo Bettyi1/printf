@@ -4,20 +4,19 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-void print_buffer(char buffer[], int *index);
+void write_content(char buffer[], int *index);
 
 /**
-* _printf - function produces format
-*@format: input value
-*@...: extra argument variables
-*
+*  _printf - function produces format
+* @format: input value
+* @...: extra argument variables
 * Return: 0
 */
 
 int _printf(const char *format, ...)
 {
 
-int k, printed = 0, printed_chars = 0;
+int k, output = 0, output_character = 0;
 int flags, width, precision, size, index = 0;
 
 	va_list argt;
@@ -34,39 +33,40 @@ int flags, width, precision, size, index = 0;
 		{
 			buffer[index++] = format[k];
 			if (index == BUFF_SIZE)
-				print_buffer(buffer, &index);
-			printed_chars++;
+				write_content(buffer, &index);
+					output_charracter++;
 		}
 		else
-	{
-			print_buffer(buffer, &index);
-			flags = get_flags(format, &k);
-			width = get_width(format, &k, argt);
-			precision = get_precision(format, &k, argt);
-			size = get_size(format, &k);
+		{
+			write_content(buffer, &index);
+			flags = f_flg(format, &k);
+			width = f_wdt(format, &k, argt);
+			precision = f_prec(format, &k, argt);
+			size = f_sizespecifier(format, &k);
 			++k;
-			printed = handle_print(format, &k, argt, buffer,
+			output = h_print(format, &k, argt, buffer,
 				flags, width, precision, size);
-			if (printed == -1)
+			if (output == -1)
 				return (-1);
-			printed_chars += printed;
+			output_character += output;
 		}
 	}
 
-	print_buffer(buffer, &index);
+	write_content(buffer, &index);
 
 	va_end(argt);
 
-	return (printed_chars);
+	return (output_character);
 }
+
 /**
- * print_buffer - prints the contents of Buffer.
+ * write_content - prints the contents of Buffer.
  * @buffer: characters array.
  * @index: Index
  *
  * Return: nothing
  */
-void print_buffer(char buffer[], int *index)
+void write_content(char buffer[], int *index)
 {
 	if (*index > 0)
 		write(1, &buffer[0], *index);
