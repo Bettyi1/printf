@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 /**
- * print_pointer - function prints a pointer
+ * h_ptr - function prints a pointer
  * @types: arguments
  * @buffer: buffer
  * @flags: flags
@@ -14,7 +14,7 @@
  * @size: size
  * Return: pointer value
  */
-int print_pointer(va_list types, char buffer[],
+int h_ptr(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char zeros = 0, space = ' ';
@@ -41,31 +41,31 @@ int print_pointer(va_list types, char buffer[],
 		len++;
 	}
 
-	if ((flags & F_ZERO) && !(flags & F_MINUS))
+	if ((flags & FLAG_O) && !(flags & FLAG_S))
 		space = '0';
-	if (flags & F_PLUS)
+	if (flags & FLAG_A)
 		zeros = '+', len++;
-	else if (flags & F_SPACE)
+	else if (flags & FLAG_P)
 		zeros = ' ', len++;
 
 	index++;
 
-		return (write_pointer(buffer, index, len,
+		return (p_wptr(buffer, index, len,
 		width, flags, space, zeros, space_start));
 }
 
 /**
- * print_non_printable - function prints non printable chars
+ * h_immprint - function prints non printable chars
  * @types: arguments
  * @size: size
  * @buffer: input value
- * @flags:  input value
-* @precision: precision
+ * @flags: input value
+ * @precision: precision
  * @width: input value
-  * Return: char
+ * Return: char
  */
 
-int print_non_printable(va_list types, char buffer[],
+int h_immprint(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int j = 0;
@@ -82,10 +82,10 @@ int update = 0;
 
 	while (str[j] != '\0')
 	{
-		if (is_printable(str[j]))
+		if (U_printx(str[j]))
 			buffer[j + update] = str[j];
 		else
-			update += append_hexa_code(str[j], buffer, j + update);
+			update += u_hexadeci(str[j], buffer, j + update);
 
 		j++;
 	}
@@ -96,7 +96,7 @@ int update = 0;
 }
 
 /**
- * print_reverse - function reverses string and print it out
+ * h_rev - function reverses string and print it out
  * @types: arguments
  * @buffer: buffer
  * @flags: flags
@@ -106,7 +106,7 @@ int update = 0;
  * Return: reversed string
  */
 
-int print_reverse(va_list types, char buffer[],
+int h_rev(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char *str;
@@ -141,7 +141,7 @@ char x;
 }
 
 /**
- * print_rot13string - function prints a string in rot13 format.
+ * rot_string - function prints a string in rot13 format.
  * @types: arguments
  * @buffer: buffer
  * @flags:  flags
@@ -150,7 +150,7 @@ char x;
  * @size: size
  * Return: string in rot13style
  */
-int print_rot13string(va_list types, char buffer[],
+int rot_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char y;
