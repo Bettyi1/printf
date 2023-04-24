@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+
 /**
- * handle_print - prints argument as specified
+ * h_print - prints argument as specified
  * @fmt: string with format specifier
  * @list: arguments.
  * @ind: index iterator.
@@ -15,19 +16,19 @@
  * @size: size
  * Return: 1, -1.
  */
-int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
+int h_print(const char *fmt, int *ind, va_list list, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int k = 0;
-	int len = 0;
-	int printed_char = -1;
+int len = 0;
+int printed_char = -1;
 
 	fmt_t fmt_types[] = {
-		{'c', print_char}, {'s', print_string}, {'%', print_percent},
-		{'i', print_int}, {'d', print_int}, {'b', print_binary},
-		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
-		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
-		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
+		{'c', print_character23}, {'s', h_stringp}, {'%', _percenthandler},
+		{'i', h_intr}, {'d', h_intr}, {'b', h_binary},
+		{'u', h_unsignedp}, {'o', h_oct}, {'x', h_hedec},
+		{'X', h_hexU}, {'p', h_ptr}, {'S', h_immprint},
+		{'r', h_rev}, {'R', rot_string}, {'\0', NULL}
 	};
 	for (; fmt_types[k].fmt != '\0'; k++)
 		if (fmt[*ind] == fmt_types[k].fmt)
