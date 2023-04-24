@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 /**
- * print_unsigned - function prints unsigned numbers
+ * h_unsignedp - function prints unsigned numbers
  * @types: arguments
  * @buffer: buffer
  * @flags:  flags
@@ -14,13 +14,13 @@
  * @size: size
  * Return: number
  */
-int print_unsigned(va_list types, char buffer[],
+int h_unsignedp(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int t = BUFF_SIZE - 2;
 	unsigned long int unsnum = va_arg(types, unsigned long int);
 
-	unsnum = convert_size_unsgnd(unsnum, size);
+	unsnum = u_r_to_unsg(unsnum, size);
 
 	if (unsnum == 0)
 		buffer[t--] = '0';
@@ -35,10 +35,10 @@ int print_unsigned(va_list types, char buffer[],
 
 	t++;
 
-	return (write_unsgnd(0, t, buffer, flags, width, precision, size));
+	return (p_unsd(0, t, buffer, flags, width, precision, size));
 }
 /**
- * print_octal - print unsigned number in octal notation
+ * h_oct - print unsigned number in octal notation
  * @types: arguments
  * @width: width
  * @buffer: buffer
@@ -47,7 +47,7 @@ int print_unsigned(va_list types, char buffer[],
  * @precision: precision
  * Return: unsigned nu.s (octal)
  */
-int print_octal(va_list types, char buffer[],
+int h_oct(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 
@@ -57,7 +57,7 @@ int print_octal(va_list types, char buffer[],
 
 	UNUSED(width);
 
-	oct_num = convert_size_unsgnd(oct_num, size);
+	oct_num = u_r_to_unsg(oct_num, size);
 
 	if (oct_num == 0)
 		buffer[o--] = '0';
@@ -70,15 +70,15 @@ int print_octal(va_list types, char buffer[],
 		oct_num /= 8;
 	}
 
-	if (flags & F_HASH && octl_num != 0)
+	if (flags & FLAG_SH && octl_num != 0)
 		buffer[o--] = '0';
 
 	o++;
 
-	return (write_unsgnd(0, o, buffer, flags, width, precision, size));
+	return (p_unsd(0, o, buffer, flags, width, precision, size));
 }
 /**
- * print_hexadecimal - function prints in hexadecimal.
+ * h_hedec - function prints in hexadecimal.
  * @types: arguments
  * @buffer: buffer
  * @precision: precision
@@ -87,14 +87,14 @@ int print_octal(va_list types, char buffer[],
  * @flags: flags
  * Return: hexadecimal no.
  */
-int print_hexadecimal(va_list types, char buffer[],
+int h_hedec(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	return (print_hexa(types, "0123456789abcdef", buffer,
+	return (h_hedexim(types, "0123456789abcdef", buffer,
 		flags, 'x', width, precision, size));
 }
 /**
- * print_hexa_upper - prints in upper hexadecimal notation.
+ * h_hexU - prints in upper hexadecimal notation.
  * @types: argument
  * @width: width
  * @flags: flags
@@ -104,15 +104,16 @@ int print_hexadecimal(va_list types, char buffer[],
  * Return: no. (upper hexad’)
  */
 
-int print_hexa_upper(va_list types, char buffer[],
+int h_hexU(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	return (print_hexa(types, "0123456789ABCDEF", buffer,
+	return (h_hedexim(types, "0123456789ABCDEF", buffer,
 		flags, 'X', width, precision, size));
+/* function calls h_hedexim function*/
 }
 
 /**
- * print_hexa - prints hexadecimal
+ * h_hedexim - prints hexadecimal
  * @types: arguments
  * @map_to: Array of values to map the number to
  * @buffer: buffer
@@ -124,7 +125,7 @@ int print_hexa_upper(va_list types, char buffer[],
  *
  * Return: Hexa no
  */
-int print_hexa(va_list types, char map_to[], char buffer[],
+int h_hedexim(va_list types, char map_to[], char buffer[],
 	int flags, char flag_ch, int width, int precision, int size)
 {
 	int h = BUFF_SIZE - 2;
@@ -133,7 +134,7 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 
 	UNUSED(width);
 
-	hexanum = convert_size_unsgnd(hexanum, size);
+	hexanum = u_r_to_unsg(hexanum, size);
 
 	if (hexanum == 0)
 		buffer[h--] = '0';
@@ -146,7 +147,7 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 		hexanum /= 16;
 	}
 
-	if (flags & F_HASH && mynum != 0)
+	if (flags & FLAG_SH && mynum != 0)
 	{
 		buffer[h--] = flag_ch;
 		buffer[h--] = '0';
@@ -154,5 +155,5 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 
 	h++;
 
-	return (write_unsgnd(0, h, buffer, flags, width, precision, size));
+	return (p_unsd(0, h, buffer, flags, width, precision, size));
 }
