@@ -111,8 +111,8 @@ int h_rev(va_list types, char buffer[],
 {
 	char *str;
 	int k;
-int count = 0;
-char x;
+	int count = 0;
+	char x;
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -156,7 +156,7 @@ int rot_string(va_list types, char buffer[],
 	char y;
 	char *str;
 	unsigned int a = 0;
-unsigned int b = 0;
+	unsigned int b = 0;
 	int count = 0;
 	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";

@@ -16,8 +16,8 @@ void write_content(char buffer[], int *index);
 int _printf(const char *format, ...)
 {
 
-int k, output = 0, output_character = 0;
-int flags, width, precision, size, index = 0;
+	int k, output = 0, output_character = 0;
+	int flags, width, precision, size, index = 0;
 
 	va_list argt;
 	char buffer[BUFF_SIZE];
